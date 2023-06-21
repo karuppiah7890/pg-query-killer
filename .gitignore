@@ -1,0 +1,9 @@
+pg-query-killer
+
+*.env*
+
+!.env.sample
+
+*.tar.gz
+
+pgdata
