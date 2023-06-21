@@ -39,5 +39,7 @@ func main() {
 
 	// Log the query and kill the queries that don't have wait event or wait type
 
+	// have dry run to just print queries and not kill them. use flags? hmm. Like --dry-run
+
 	// Ensure that the log file is log rotated
 }
