@@ -16,11 +16,15 @@ type LongRunningQuery struct {
 
 type LongRunningQueries []LongRunningQuery
 
-func (c *Client) GetListOfLongRunningQueries() LongRunningQueries {
+func (c *Client) GetListOfLongRunningQueries() (LongRunningQueries, error) {
 	longRunningQueries := make(LongRunningQueries, 0)
 
-	c.db.NewRaw("SELECT pid, query, query_start, wait_event, wait_event_type, now() - query_start AS query_time FROM pg_stat_activity WHERE (now() - query_start) > interval '5 seconds' and state = 'active'").
+	err := c.db.NewRaw("SELECT pid, query, query_start, wait_event, wait_event_type, now() - query_start AS query_time FROM pg_stat_activity WHERE (now() - query_start) > interval '5 seconds' and state = 'active'").
 		Scan(context.TODO(), &longRunningQueries)
 
-	return longRunningQueries
+	if err != nil {
+		return nil, err
+	}
+
+	return longRunningQueries, nil
 }
