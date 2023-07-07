@@ -35,7 +35,7 @@ func main() {
 
 	// Get List of long running queries - say which are running for say 1 minute or 2 minutes long or 5 minutes long
 
-	longRunningQueries, err := client.GetListOfLongRunningQueries()
+	longRunningQueries, err := client.GetListOfLongRunningQueries(c.GetQueryTimeThreshold())
 
 	if err != nil {
 		log.Fatalf("error occurred while getting long running queries: %v", err)
