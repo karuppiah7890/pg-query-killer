@@ -41,7 +41,9 @@ func main() {
 		log.Fatalf("error occurred while getting long running queries: %v", err)
 	}
 
-	fmt.Printf("%+v", longRunningQueries)
+	for _, longRunningQuery := range longRunningQueries {
+		fmt.Printf("%+v\n\n", longRunningQuery)
+	}
 
 	// Log the query and kill the queries that don't have wait event or wait type
 
